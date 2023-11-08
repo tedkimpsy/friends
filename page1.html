@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사진 인화 접수</title>
+    <!-- Bootstrap CSS 추가 -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="node_modules/pouchdb/dist/pouchdb.min.js"></script>
+    <style>
+        /* 스타일링 */
+        body {
+            padding-top: 20px; /* 모든 내용을 상단에 고정하기 위한 패딩 추가 */
+            /* 전체 배경 스타일
+            background: rgb(34, 193, 195);
+            background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+            background-attachment: fixed; /* 배경 이미지 고정 */
+        }
+
+        /* 컨테이너 스타일 */
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* 흰색 상자 느낌을 주는 배경색 및 투명도 설정 */
+            border-radius: 5px; /* 모서리 둥글게 */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* 5px 정도의 연한 그림자 적용 */
+            margin: 20px auto; /* 가운데 정렬 및 컨테이너 간 여백 추가 */
+            padding: 20px; /* 내용 안의 여백 추가 */
+        }
+
+        /* 버튼 스타일 */
+        .btn-print {
+            background-color: #007bff;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        /* 테이블 스타일 */
+        .table-container {
+            max-height: 300px; /* 테이블의 최대 높이 설정 */
+            overflow: auto; /* 스크롤 스타일 적용 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+
+            <!-- 왼쪽 화면 - 폼 입력 -->
+<div class="col-md-6">
+    <h3>사진 인화 접수</h3>
+    <form id="photoForm">
+        <div class="form-group" required style="width: 250px">
+            <label for="name">이름:</label>
+            <input type="text" class="form-control" id="name"> <!-- 입력 칸 너비 조정 -->
+        </div>
+        <div class="form-group" required style="width: 250px">
+            <label for="studentId">학번:</label>
+            <input type="text" class="form-control" id="studentId"> <!-- 입력 칸 너비 조정 -->
+        </div>
+        <div class="form-group" required style="width: 250px">
+            <label for="photoNumber">사진 번호:</label>
+            <input type="text" class="form-control" id="photoNumber"> <!-- 입력 칸 너비 조정 -->
+        </div>
+        <button type="submit" class="btn btn-primary">신청하기</button>
+    </form>
+</div>
+    
+<!-- 오른쪽 화면 - 테이블 표시 -->
+<div class="col-md-6">
+    <h3>접수 목록</h3>
+    
+    <!-- 검색창 및 버튼 추가 -->
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" id="searchInput" placeholder="이름으로 검색">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="searchButton">검색</button>
+            <!-- 초기화 버튼 추가 -->
+            <button class="btn btn-outline-secondary" type="button" id="resetButton">초기화</button>
+        </div>
+    </div>
+    
+    <!-- 테이블 컨테이너에 스타일 적용 -->
+    <div class="table-container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>학번</th>
+                    <th>사진 번호</th>
+                    <th>출력</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody id="photoTableBody">
+                <!-- 여기에 데이터가 실시간으로 추가될 것입니다. -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+    <script src="page1.js"></script>
+</body>
+</html>
